@@ -1,0 +1,45 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: demo-as-an-app
+spec:
+  appInfo:
+    categories:
+      - uncategorised
+    documentation: demo_as_an_app/docs
+    ociSpecVersion: v1.0.0
+  author: roman
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+    - file:
+        path: demo_as_an_app/api/v1alpha1/pysrc
+    - container:
+        image: ghcr.io/hellt/demo_as_an_app/workflows/installdemo:latest
+        name: installdemo
+  description: Sample description
+  group: demo-as-an-app.netdevops.me
+  image: ghcr.io/hellt/demo-as-an-app:v0.0.0-260216123917
+  supportedCoreVersions:
+    - v4.0.0-0
+  title: Demo As An App
+  version: v1alpha1
+  components:
+    - crd:
+        api:
+          expose: readWrite
+        path: demo_as_an_app/crds/demo-as-an-app.netdevops.me_installdemoes.yaml
+        schema: demo_as_an_app/openapiv3/eda_oas_demo-as-an-app.netdevops.me_installdemoes.json
+        ui:
+          category: Demo As An App
+          name: Install Demoes
+        workflow: true
+        names:
+          singular: installdemo
+          kind: InstallDemo
+          listKind: InstallDemoList
+          plural: installdemoes
+    - cr:
+        path: demo_as_an_app/workflows/installdemo/flowdefinition.yaml
