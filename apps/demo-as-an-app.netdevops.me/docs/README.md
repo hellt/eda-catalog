@@ -1,7 +1,7 @@
 # demo-as-an-app
 
-This is a sample application. You should change this.
+Change workflow code, then run:
 
-## How to use
+```bash
 
-Populate information about your application here.
+```
