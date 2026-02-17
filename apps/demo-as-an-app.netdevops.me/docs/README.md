@@ -17,3 +17,9 @@ and deploy the current version in your cluster (this assumes that the app oci im
 ```bash
 eb --app demo_as_an_app deploy
 ```
+
+Or all in one step:
+
+```bash
+make build-workflows && make package-workflows && eb --app demo_as_an_app deploy
+```
