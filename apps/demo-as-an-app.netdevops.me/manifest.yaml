@@ -21,7 +21,7 @@ spec:
         name: installdemo
   description: Sample description
   group: demo-as-an-app.netdevops.me
-  image: ghcr.io/hellt/demo-as-an-app:v0.0.0-260217110109
+  image: ghcr.io/hellt/demo-as-an-app:v0.0.0-260217112902
   supportedCoreVersions:
     - v4.0.0-0
   title: Demo As An App
