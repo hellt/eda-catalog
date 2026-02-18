@@ -23,7 +23,7 @@ spec:
         path: demo_as_an_app/deps
   description: Sample description
   group: demo-as-an-app.netdevops.me
-  image: ghcr.io/hellt/demo-as-an-app:v0.0.0-260218175200
+  image: ghcr.io/hellt/demo-as-an-app:v0.0.0-260218184404
   supportedCoreVersions:
     - v4.0.0-0
   title: Demo As An App
@@ -38,9 +38,9 @@ spec:
           name: Install Demoes
         workflow: true
         names:
-          singular: installdemo
-          kind: InstallDemo
           listKind: InstallDemoList
           plural: installdemoes
+          singular: installdemo
+          kind: InstallDemo
     - cr:
         path: demo_as_an_app/workflows/installdemo/flowdefinition.yaml
