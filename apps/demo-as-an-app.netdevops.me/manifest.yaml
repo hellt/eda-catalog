@@ -5,7 +5,7 @@ metadata:
 spec:
   appInfo:
     categories:
-      - uncategorised
+      - demo
     documentation: demo_as_an_app/docs
     ociSpecVersion: v1.0.0
   author: roman
@@ -23,7 +23,7 @@ spec:
         path: demo_as_an_app/deps
   description: Sample description
   group: demo-as-an-app.netdevops.me
-  image: ghcr.io/hellt/demo-as-an-app:v0.0.0-260219105250
+  image: ghcr.io/hellt/demo-as-an-app:v0.1.0
   supportedCoreVersions:
     - v4.0.0-0
   title: Demo As An App

@@ -8,6 +8,8 @@ The namespace will be created by the workflow, then the Try EDA three node topol
 
 > This app has been tested on 25.12 EDA release.
 
+The `srlinux-ghcr-25.10.1` node profile is used in this demo and it is currently not configurable.
+
 ## Testman commands
 
 Using the default demo namespace
@@ -29,7 +31,8 @@ Write down leaf1 edge interface name and leaf2 edge interface IP address for the
 
 Ping between two edge interfaces (interfaces e-1-3 on leaf1 and leaf2). The source is the edge interface name on leaf1 and destination is the IP address of the edge interface on leaf2 as extracted in the previous step:
 
-```
+```bash
+# don't forget to replace the interface IP address to match your setup
 edactl -n demo-as-an-app testman ping eif-name eif-leaf1-ethernet-1-3-vlan-10 10.0.0.11
 ```
 
