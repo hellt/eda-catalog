@@ -1,0 +1,128 @@
+apiVersion: core.eda.nokia.com/v1
+kind: Manifest
+metadata:
+  name: microsegmentation
+spec:
+  appInfo:
+    categories:
+      - security
+    documentation: microsegmentation/docs
+    ociSpecVersion: v1.0.0
+  author: Nokia
+  dependencies:
+    - file:
+        path: utils
+    - file:
+        path: common
+    - file:
+        path: microsegmentation/api/v1alpha1/pysrc
+    - file:
+        path: microsegmentation/alarms/pysrc
+    - file:
+        path: microsegmentation/intents
+    - file:
+        path: services/api/v1/pysrc
+    - file:
+        path: filters/
+    - file:
+        path: protocols/api/v1/pysrc
+    - container:
+        image: fake.reg/nokia-eda/apps/microsegmentation/workflows/grouptagpoolsetup:latest
+        name: grouptagpoolsetup
+  description: Micro segmentation
+  group: microsegmentation.eda.nokia.com
+  image: ghcr.io/nokia-eda/apps/microsegmentation:v999.9.0-260225171824
+  supportedCoreVersions:
+    - v4.0.0-0
+  supportedEndpoints:
+    - "srl:0.0.0"
+    - "srl:25.3.*"
+  title: Micro Segmentation
+  version: v1alpha1
+  components:
+    - crd:
+        api:
+          expose: readWrite
+        path: microsegmentation/crds/microsegmentation.eda.nokia.com_grouptags.yaml
+        schema: microsegmentation/openapiv3/eda_oas_microsegmentation.eda.nokia.com_grouptags.json
+        ui:
+          category: Micro Segmentation
+          name: Group Tags
+        names:
+          plural: grouptags
+          singular: grouptag
+          kind: GroupTag
+          listKind: GroupTagList
+    - crd:
+        api:
+          expose: none
+        path: microsegmentation/crds/microsegmentation.eda.nokia.com_grouptagdeployments.yaml
+        schema: microsegmentation/openapiv3/eda_oas_microsegmentation.eda.nokia.com_grouptagdeployments.json
+        names:
+          singular: grouptagdeployment
+          kind: GroupTagDeployment
+          listKind: GroupTagDeploymentList
+          plural: grouptagdeployments
+    - crd:
+        api:
+          expose: readWrite
+        path: microsegmentation/crds/microsegmentation.eda.nokia.com_assocationpolicies.yaml
+        schema: microsegmentation/openapiv3/eda_oas_microsegmentation.eda.nokia.com_assocationpolicies.json
+        ui:
+          category: Micro Segmentation
+          name: Group Tag Assocation Policies
+        names:
+          singular: assocationpolicy
+          kind: AssocationPolicy
+          listKind: AssocationPolicyList
+          plural: assocationpolicies
+    - crd:
+        api:
+          expose: readWrite
+        path: microsegmentation/crds/microsegmentation.eda.nokia.com_microsegmentationpolicies.yaml
+        schema: microsegmentation/openapiv3/eda_oas_microsegmentation.eda.nokia.com_microsegmentationpolicies.json
+        ui:
+          category: Micro Segmentation
+          name: microsegmentationpolicies
+          #TODO(jeroenc) RFE 502661: relax admissioncontrol for bootstrap CRs
+          #    - cr:
+          #        path: microsegmentation/resources/pool-global.yaml
+          #    - cr:
+          #        path: microsegmentation/resources/pool-scoped.yaml
+        names:
+          listKind: MicroSegmentationPolicyList
+          plural: microsegmentationpolicies
+          singular: microsegmentationpolicy
+          kind: MicroSegmentationPolicy
+    - cr:
+        path: microsegmentation/alarms/alarms.yaml
+    - script:
+        path: microsegmentation/intents/grouptag/config_intent.py
+        trigger:
+          kind: GroupTag
+        type: config
+    - script:
+        path: microsegmentation/intents/microsegmentationpolicy/config_intent.py
+        trigger:
+          kind: MicroSegmentationPolicy
+        type: config
+    - script:
+        path: microsegmentation/intents/assocationpolicy/config_intent.py
+        trigger:
+          kind: AssocationPolicy
+        type: config
+    - crd:
+        api:
+          expose: readWrite
+        path: microsegmentation/crds/microsegmentation.eda.nokia.com_poolsetupworkflows.yaml
+        schema: microsegmentation/openapiv3/eda_oas_microsegmentation.eda.nokia.com_poolsetupworkflows.json
+        ui:
+          name: Pool Setup Workflows
+        workflow: true
+        names:
+          plural: poolsetupworkflows
+          singular: poolsetupworkflow
+          kind: PoolSetupWorkflow
+          listKind: PoolSetupWorkflowList
+    - cr:
+        path: microsegmentation/workflows/grouptagpoolsetup/flowdefinition.yaml
